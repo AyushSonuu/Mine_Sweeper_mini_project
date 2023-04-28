@@ -1,5 +1,10 @@
 package minesweeper;
 
+/**
+ * 
+ * @author SUMALATHA
+ *
+ */
 public class Cell {
 	private boolean isMine;
 	private boolean isClicked;

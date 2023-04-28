@@ -1,7 +1,11 @@
 package minesweeper;
 
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author MRUDULA PATIL
+ *
+ */
 public class Board {
 	private ArrayList<ArrayList<Cell>> board = new ArrayList<ArrayList<Cell>>();
 
