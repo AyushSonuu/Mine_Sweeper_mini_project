@@ -18,7 +18,7 @@ public class UtilityMineSweeper {
                 {
                     for (int j = -1; j <= 1; j++) 
                     {
-                        if (x+i >= 0 && x+i < board.getBoard().size() && 
+                        if (x+i >= 0 && x+i < board.getBoard().get(x).size() && 
                         		y+j >= 0 && y+j < board.getBoard().get(x).size()
                         		&& board.getBoard().get(x+i).get(y+j).isMine()) 
                         {
@@ -30,4 +30,8 @@ public class UtilityMineSweeper {
             }
         }
     }
+
+	
 }
+
+

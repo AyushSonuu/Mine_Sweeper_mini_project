@@ -10,12 +10,12 @@ import java.util.Random;
  *
  */
 public class MineSweeper {
-	
+
 	private Board board;
 	private int numberOfClick =0;
 	private Level level;
 	private int numMines ;
-	
+
 	/**
 	 * Constructor which initializes our game board
 	 * @param easy2 of the game decided by the user
@@ -24,9 +24,9 @@ public class MineSweeper {
 		this.level = lev;
 		this.numMines = level.getNumberOfBombs();
 		this.board = new Board(lev);
-		
+
 	}
-	
+
 	/**
 	 * stores the game board i.e user interface in the string used to 
 	 * display it in event loop
@@ -39,22 +39,22 @@ public class MineSweeper {
 			s = s + "-----------------------------------------------------\n";
 			for (int j = 0; j < this.level.getCols(); j++) {
 				if(this.board.getBoard().get(i).get(j).isClicked()){
-					
+
 					s = s+" "+board.getBoard().get(i).get(j)+" " + " | ";
-					
+
 				}else if(this.board.getBoard().get(i).get(j).isFlagged()){
-					
+
 					s= s+"#"+"#"+"#"+" | ";
-					
+
 				}
 				else {
-				
+
 					s= s+i+","+j+" | ";
 				}
 
 			}
 			s = s+"\n";
-			
+
 		}s = s + "-----------------------------------------------------\n";
 		s=s+"----------------------GAME-BOARD---------------------\n";
 		return s;
@@ -76,7 +76,7 @@ public class MineSweeper {
 						continue;
 					}
 					m=m+i+","+j+" | ";
-	
+
 				}else{
 					m=m+" *  | ";
 				}		
@@ -86,8 +86,8 @@ public class MineSweeper {
 		m = m+"------------------------BOMBS------------------------\n";
 		return m;
 	}
-	
-	
+
+
 	/**
 	 * used to make a first click while playing the game
 	 * it takes row value and column values as input 
@@ -98,13 +98,13 @@ public class MineSweeper {
 	private void makeFirstClick(int row,int col){
 		if(numberOfClick==0){
 			this.board.getBoard().get(row).get(col).setClicked(true);
-//			board.getBoard().get(row).get(col).setNumNeighbors(3);
+			//			board.getBoard().get(row).get(col).setNumNeighbors(3);
 			this.numberOfClick +=1;
 			this.mineGenerator();
 			UtilityMineSweeper.setNumberOfNeuighbouringMines(board);
 		}
 	}
-	
+
 	/**
 	 * used in event loops for making clicks
 	 * @param row value to click
@@ -115,13 +115,55 @@ public class MineSweeper {
 		if(this.board.getBoard().get(row).get(col).isMine()){
 			System.out.println("game over");
 			System.out.println(this.revealMine());
+			return;
 		}else{
 			this.board.getBoard().get(row).get(col).setClicked(true);
+			this.checkNeighbour(row, col);
+			this.showNeighbourOfZero();
 			this.numberOfClick+=1;
 		}
-		
+
 	}
-	
+	public static int c = 0;
+	public  void checkNeighbour(int row, int col){
+		for(int i =-1;i<=1;i++){
+
+			for(int j= -1; j<=1;j++){
+				if (row+i >= 0 && row+i < this.board.getBoard().size() && 
+						col+j >= 0 && col+j < this.board.getBoard().get(row).size()
+						&& this.board.getBoard().get(row+i).get(col+j).getNumNeighbors()==0
+						&& !this.board.getBoard().get(row+i).get(col+j).isFlagged()
+						&& !this.board.getBoard().get(row+i).get(col+j).isClicked()) 
+				{
+					this.board.getBoard().get(row+i).get(col+j).setClicked(true);
+					c =c +1;
+					System.out.println(c);
+					checkNeighbour(row+i,col+j);
+				}
+			}
+		}
+	}
+	public void showNeighbourOfZero(){
+		for (int x = 0; x < this.board.getBoard().size(); x++)
+		{
+			for (int y = 0; y < this.board.getBoard().get(x).size(); y++) 
+			{
+				for (int i = -1; i <= 1; i++) 
+				{
+					for (int j = -1; j <= 1; j++) 
+					{
+						if(x+i >= 0 && x+i < board.getBoard().get(x).size()
+								&& y+j >= 0 && y+j < board.getBoard().get(x).size()
+								&& this.board.getBoard().get(x).get(y).getNumNeighbors()==0
+								&& this.board.getBoard().get(x+i).get(y+j).isClicked()) 
+						{
+							this.board.getBoard().get(x+i).get(y+j).setClicked(true);
+						}
+					}
+				}
+			}
+		}
+	}
 	/**
 	 * its an utility method used in make click method
 	 * after first click it randomly generates the bombs 
@@ -147,16 +189,16 @@ public class MineSweeper {
 	 * @return String describing about the falg set or not
 	 */
 	public String makeFlagged(int row, int col, boolean f) {
-		
+
 		if(this.numberOfClick>0){
 			if(!this.board.getBoard().get(row).get(col).isClicked())
 			{
 				this.board.getBoard().get(row).get(col).setFlagged(f);
 				return "set to falagged";
 			}
-				}
-		return "cannot set to falgged";
 		}
-		
+		return "cannot set to falgged";
+	}
+
 
 }

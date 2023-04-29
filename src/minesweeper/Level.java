@@ -1,5 +1,10 @@
 package minesweeper;
 
+/**
+ * 
+ * @author VISHAL BIRADER
+ *
+ */
 public final class Level {
 	
 	private int rows;
@@ -44,9 +49,5 @@ public final class Level {
 	public int getNumberOfBombs() {
 		return numberOfBombs;
 	}
-
-	
-	
-	
-	 
+ 
 }
