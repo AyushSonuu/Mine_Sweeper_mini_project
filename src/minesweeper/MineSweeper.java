@@ -87,7 +87,6 @@ public class MineSweeper {
 		return m;
 	}
 
-
 	/**
 	 * used to make a first click while playing the game
 	 * it takes row value and column values as input 
@@ -101,7 +100,7 @@ public class MineSweeper {
 			//			board.getBoard().get(row).get(col).setNumNeighbors(3);
 			this.numberOfClick +=1;
 			this.mineGenerator();
-			UtilityMineSweeper.setNumberOfNeuighbouringMines(board);
+			this.setNumbertoNeuighbouringMines(board);
 		}
 	}
 
@@ -116,15 +115,24 @@ public class MineSweeper {
 			System.out.println("game over");
 			System.out.println(this.revealMine());
 			return;
-		}else{
+		}else if (this.board.getBoard().get(row).get(col).getNumNeighbors()>0){
 			this.board.getBoard().get(row).get(col).setClicked(true);
+			this.numberOfClick+=1;
+			
+		}else if(this.board.getBoard().get(row).get(col).getNumNeighbors()==0){
 			this.checkNeighbour(row, col);
 			this.showNeighbourOfZero();
 			this.numberOfClick+=1;
 		}
 
 	}
-	public static int c = 0;
+	
+	/**
+	 * on making a click it recursively revels all the neighbor
+	 * positions which are zero
+	 * @param row on which click was made
+	 * @param col on which click was made
+	 */
 	public  void checkNeighbour(int row, int col){
 		for(int i =-1;i<=1;i++){
 
@@ -136,13 +144,15 @@ public class MineSweeper {
 						&& !this.board.getBoard().get(row+i).get(col+j).isClicked()) 
 				{
 					this.board.getBoard().get(row+i).get(col+j).setClicked(true);
-					c =c +1;
-					System.out.println(c);
 					checkNeighbour(row+i,col+j);
 				}
 			}
 		}
 	}
+	
+	/**
+	 * this function reveals all the positions which are neighbor of zero
+	 */
 	public void showNeighbourOfZero(){
 		for (int x = 0; x < this.board.getBoard().size(); x++)
 		{
@@ -152,18 +162,22 @@ public class MineSweeper {
 				{
 					for (int j = -1; j <= 1; j++) 
 					{
+						if(this.board.getBoard().get(x).get(y).getNumNeighbors()==0&&
+								this.board.getBoard().get(x).get(y).isClicked()){
 						if(x+i >= 0 && x+i < board.getBoard().get(x).size()
 								&& y+j >= 0 && y+j < board.getBoard().get(x).size()
-								&& this.board.getBoard().get(x).get(y).getNumNeighbors()==0
-								&& this.board.getBoard().get(x+i).get(y+j).isClicked()) 
+								&& !this.board.getBoard().get(x+i).get(y+j).isFlagged()
+								&& !this.board.getBoard().get(x+i).get(y+j).isClicked()) 
 						{
 							this.board.getBoard().get(x+i).get(y+j).setClicked(true);
+						}
 						}
 					}
 				}
 			}
 		}
 	}
+	
 	/**
 	 * its an utility method used in make click method
 	 * after first click it randomly generates the bombs 
@@ -200,5 +214,33 @@ public class MineSweeper {
 		return "cannot set to falgged";
 	}
 
+	/**
+	 * this methods calculates the numbers of each of the box
+	 * and set the value of Cell numNegighnours based on the
+	 * calculation
+	 * @return void
+	 */
+	private void setNumbertoNeuighbouringMines(Board board){
+		for (int x = 0; x < board.getBoard().size(); x++)
+		{
+            for (int y = 0; y < board.getBoard().get(x).size(); y++) 
+            {
+                int numNeighbors = 0;
+                for (int i = -1; i <= 1; i++) 
+                {
+                    for (int j = -1; j <= 1; j++) 
+                    {
+                        if (x+i >= 0 && x+i < board.getBoard().get(x).size() && 
+                        		y+j >= 0 && y+j < board.getBoard().get(x).size()
+                        		&& board.getBoard().get(x+i).get(y+j).isMine()) 
+                        {
+                            numNeighbors++;
+                        }
+                    }
+                }
+                board.getBoard().get(x).get(y).setNumNeighbors(numNeighbors);
+            }
+        }
+    }
 
 }
