@@ -30,7 +30,7 @@ public class Testing {
 				System.out.println(row);
 				int col= Integer.parseInt(position.substring(1, 2));
 				System.out.println(col);
-				m1.makeClick(row, col);
+				System.out.println(m1.makeClick(row, col));
 				break;
 			}
 			case 2:

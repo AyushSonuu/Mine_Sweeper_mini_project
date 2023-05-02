@@ -15,6 +15,7 @@ public class MineSweeper {
 	private int numberOfClick =0;
 	private Level level;
 	private int numMines ;
+	private Score score;
 
 	/**
 	 * Constructor which initializes our game board
@@ -24,6 +25,7 @@ public class MineSweeper {
 		this.level = lev;
 		this.numMines = level.getNumberOfBombs();
 		this.board = new Board(lev);
+		this.score = new Score(lev);
 
 	}
 
@@ -65,8 +67,9 @@ public class MineSweeper {
 	 * @return string which is used to display in event loop
 	 */
 	public String revealMine(){
+		score.updateRevelAns();
 		String m ="------------------------BOMBS------------------------\n";
-
+		
 		for(int i=0;i<board.getBoard().size();i++){
 			m = m + "-----------------------------------------------------\n";
 			for(int j =0; j<board.getBoard().get(i).size();j++){
@@ -95,12 +98,14 @@ public class MineSweeper {
 	 * @param col
 	 */
 	private void makeFirstClick(int row,int col){
+		
 		if(numberOfClick==0){
+			this.score.updateRevealedCells();
 			this.board.getBoard().get(row).get(col).setClicked(true);
 			//			board.getBoard().get(row).get(col).setNumNeighbors(3);
 			this.numberOfClick +=1;
 			this.mineGenerator();
-			this.setNumbertoNeuighbouringMines(board);
+			this.setNumberToNeuighbouringMines(board);
 		}
 	}
 
@@ -109,21 +114,26 @@ public class MineSweeper {
 	 * @param row value to click
 	 * @param col value to click
 	 */
-	public void makeClick(int row, int col){
+	public String makeClick(int row, int col){
 		this.makeFirstClick(row, col);
 		if(this.board.getBoard().get(row).get(col).isMine()){
-			System.out.println("game over");
+			System.out.println();
+			System.out.println(score.getScore());
 			System.out.println(this.revealMine());
-			return;
+			return "game over";
 		}else if (this.board.getBoard().get(row).get(col).getNumNeighbors()>0){
 			this.board.getBoard().get(row).get(col).setClicked(true);
+			this.score.updateRevealedCells();
 			this.numberOfClick+=1;
+			return "";
 			
 		}else if(this.board.getBoard().get(row).get(col).getNumNeighbors()==0){
 			this.checkNeighbour(row, col);
 			this.showNeighbourOfZero();
 			this.numberOfClick+=1;
+			return "";
 		}
+		return "";
 
 	}
 	
@@ -144,6 +154,7 @@ public class MineSweeper {
 						&& !this.board.getBoard().get(row+i).get(col+j).isClicked()) 
 				{
 					this.board.getBoard().get(row+i).get(col+j).setClicked(true);
+					this.score.updateRevealedCells();
 					checkNeighbour(row+i,col+j);
 				}
 			}
@@ -170,6 +181,7 @@ public class MineSweeper {
 								&& !this.board.getBoard().get(x+i).get(y+j).isClicked()) 
 						{
 							this.board.getBoard().get(x+i).get(y+j).setClicked(true);
+							this.score.updateRevealedCells();
 						}
 						}
 					}
@@ -208,6 +220,16 @@ public class MineSweeper {
 			if(!this.board.getBoard().get(row).get(col).isClicked())
 			{
 				this.board.getBoard().get(row).get(col).setFlagged(f);
+				if(this.board.getBoard().get(row).get(col).isFlagged()
+						&& this.board.getBoard().get(row).get(col).isMine())
+				{
+					this.score.updateFlaggedMines();
+				}
+				else if(this.board.getBoard().get(row).get(col).isFlagged()
+						&& !this.board.getBoard().get(row).get(col).isMine())
+				{
+					this.score.updateIncorrectFlags();
+				}
 				return "set to falagged";
 			}
 		}
@@ -220,7 +242,7 @@ public class MineSweeper {
 	 * calculation
 	 * @return void
 	 */
-	private void setNumbertoNeuighbouringMines(Board board){
+	private void setNumberToNeuighbouringMines(Board board){
 		for (int x = 0; x < board.getBoard().size(); x++)
 		{
             for (int y = 0; y < board.getBoard().get(x).size(); y++) 
