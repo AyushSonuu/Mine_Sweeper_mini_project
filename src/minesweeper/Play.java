@@ -41,6 +41,7 @@ public class Play {
 				if(m1.getBoardd().getBoard().get(row).get(col).isMine())
 					break;
 				
+				
 		}
 		switch(swca)
 		{

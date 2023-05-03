@@ -283,9 +283,21 @@ public class MineSweeper {
         }
     }
 
+	
 	public Board getBoardd() {
 		// TODO Auto-generated method stub
 		return this.board;
+	}
+	
+	public void win(){
+		int count =0;
+		for (int x = 0; x < this.board.getBoard().size(); x++)
+		{
+			for (int y = 0; y < this.board.getBoard().get(x).size(); y++) 
+			{
+				
+			}
+		}
 	}
 
 }
