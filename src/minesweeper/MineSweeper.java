@@ -6,8 +6,20 @@ import java.util.Random;
 
 /**
  * MineSweeper is class which is used to create the event loop
- * in the main method it has board numberOfclick, level and numMines
- * as its instance variables
+ * in the main method it has board numberOfclick, level, numMines
+ * score, topscorer, as its instance variables.
+ * it has following methods 
+ * 01. String printBoard();
+ * 02. String revelMine();
+ * 03. void makeFirstClick(int row,int col);
+ * 04. String makeClick(int row, int col);
+ * 05. void checkNeighbour(int row, int col);
+ * 06. void showNeighbourOfZero();
+ * 07. void mineGenerator();
+ * 08. String makeFlagged(int row, int col, boolean f);
+ * 09. setNumberToNeuighbouringMines(Board board);
+ * 10. Board getBoardd();
+ * 11. boolean win();
  * @author AYUSH
  *
  */

@@ -27,7 +27,7 @@ public class TopScorer {
 	}
 	
 	/**
-	 * reads the fine and give you highest score
+	 * reads the file and give you highest score
 	 * @throws FileNotFoundException
 	 */
 	public void readFile() throws FileNotFoundException{

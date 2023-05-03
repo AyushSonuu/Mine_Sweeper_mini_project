@@ -19,23 +19,39 @@ public class Score {
         this.flaggedMines = 0;
         this.incorrectFlags = 0;
     }
-
+    
+    /**
+     * increments the reveled cells by +1
+     */
     public void updateRevealedCells() {
         this.revealedCells++;
     }
     
+    /**
+     * updates the revel answer by -1
+     */
     public void updateRevelAns() {
         this.revelAns++;
     }
-
+    
+    /** 
+     * updates the flagged mines count by +1
+     */
     public void updateFlaggedMines() {
         this.flaggedMines++;
     }
 
+    /**
+     * update incorrect flag count by -1
+     */
     public void updateIncorrectFlags() {
         this.incorrectFlags++;
     }
-
+    
+    /**
+     * calculates the score based on the difficulty level
+     * @return calculated score
+     */
     public int getScore() {
         int points = 0;
        if (this.difficulty==Level.EASY){
