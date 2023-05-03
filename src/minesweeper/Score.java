@@ -13,6 +13,11 @@ public class Score {
     private int incorrectFlags;
     private int revelAns;
 
+    /**
+     * constructor which takes as difficulty
+     * level as argument
+     * @param difficulty Level of the game
+     */
     public Score(Level difficulty) {
         this.difficulty = difficulty;
         this.revealedCells = 0;
@@ -28,7 +33,7 @@ public class Score {
     }
     
     /**
-     * updates the revel answer by -1
+     * updates the revel answer by +1
      */
     public void updateRevelAns() {
         this.revelAns++;
@@ -42,7 +47,7 @@ public class Score {
     }
 
     /**
-     * update incorrect flag count by -1
+     * update incorrect flag count by +1
      */
     public void updateIncorrectFlags() {
         this.incorrectFlags++;
@@ -50,7 +55,7 @@ public class Score {
     
     /**
      * calculates the score based on the difficulty level
-     * @return calculated score
+     * @return calculated score 
      */
     public int getScore() {
         int points = 0;

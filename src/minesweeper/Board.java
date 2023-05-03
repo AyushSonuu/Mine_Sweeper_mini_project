@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * it creates a 2D array of Cell type
+ * which is our board
  * @author MRUDULA PATIL
  *
  */
@@ -12,7 +13,7 @@ public class Board {
 	
 	/**
 	 * constructor takes level as input
-	 * @param lev
+	 * @param lev it takes input as level of the game
 	 */
 	public Board(Level lev){
 		if (lev==Level.EASY){
@@ -26,7 +27,7 @@ public class Board {
 
 	/**
 	 * returns board instance
-	 * @return
+	 * @return returns the board instance
 	 */
 	public ArrayList<ArrayList<Cell>> getBoard() {
 		return board;
@@ -35,10 +36,10 @@ public class Board {
 	/**
 	 * creates cell instance for every position and assigns 
 	 * with default values
-	 * @param arr
-	 * @param roww
-	 * @param coll
-	 * @return
+	 * @param arr 2D ArayList 
+	 * @param roww number of rows based on difficulty
+	 * @param coll number of columns based on difficulty
+	 * @return 2D ArrayList of Objects of Cell class
 	 */
 	public ArrayList<ArrayList<Cell>> initilizeArray(ArrayList<ArrayList<Cell>> arr,int roww, int coll){
 		for (int i = 0; i <roww ; i++) {

@@ -8,3 +8,4 @@ AYUSH : 150
 anmol : 150
 sohail : 150
 ayush : 130
+ayu : 350

@@ -13,7 +13,10 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
- * writes to the file
+ * writes to the file the score of current player
+ * then compares his score with previous players 
+ * if his score is highest then he will be the 
+ * highest scorer
  * @author AYUSH
  *
  */
@@ -22,13 +25,18 @@ public class TopScorer {
 	private int score;
 	private File f = new File("score.txt");
 	
+	/**
+	 * this construct takes player name as input
+	 * @param name player name
+	 */
 	public TopScorer(String name){
 		this.Player_name = name;
 	}
 	
 	/**
 	 * reads the file and give you highest score
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException if the file doesn't
+	 * exist then it throws this exception
 	 */
 	public void readFile() throws FileNotFoundException{
 		Scanner sc = new Scanner(f);
@@ -63,7 +71,8 @@ public class TopScorer {
 
 	/**
 	 * writing the score to the file 
-	 * @throws IOException
+	 * @throws IOException when something wrong happened
+	 * while performing i.o operations
 	 */
 	public void writeFile() throws IOException{
 		this.f.createNewFile();
@@ -75,6 +84,10 @@ public class TopScorer {
 		pw.close();
 	}
 	
+	/**
+	 * setter for the score variable 
+	 * @param score score calculated
+	 */
 	public void setScore(int score) {
 		this.score = score;
 	}

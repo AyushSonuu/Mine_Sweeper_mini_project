@@ -3,8 +3,9 @@ package minesweeper;
 import java.util.Scanner;
 
 public class Play {
-
+	static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
+
 		game();
 }
 	
@@ -12,12 +13,12 @@ public class Play {
 	 * starting and playing the game
 	 */
 	public static void game(){
-	Scanner sc = new Scanner(System.in);
 	System.out.println("----------ENTER YOUR SWEET NAME----------");
 	String name = sc.nextLine();
 	MineSweeper m1 = new MineSweeper(Level.EASY,name);
 	//event loop
 	while(true){
+		
 		System.out.println(m1.PrintBoard());
 		System.out.println("enter the position as a string eg 4,4 is 44\n"
 				+ "1.click on the position \n"

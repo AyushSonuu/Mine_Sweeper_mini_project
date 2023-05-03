@@ -41,7 +41,7 @@ public class Cell {
 
 	/**
 	 * sets the cell as it has mine
-	 * @param isMine
+	 * @param isMine the particular cell has mine or not
 	 */
 	public void setMine(boolean isMine) {
 		this.isMine = isMine;
@@ -57,7 +57,7 @@ public class Cell {
 
 	/**
 	 * set the cell to as clicked
-	 * @param isClicked
+	 * @param isClicked this particular cell is clicked or not
 	 */
 	public void setClicked(boolean isClicked) {
 		this.isClicked = isClicked;
@@ -65,7 +65,7 @@ public class Cell {
 	
 	/**
 	 * tells weather the cell is flagged or not
-	 * @return true or false
+	 * @return true or false based on cell information
 	 */
 	public boolean isFlagged() {
 		return this.isFlagged;
@@ -73,7 +73,7 @@ public class Cell {
 
 	/**
 	 * set the cell to as flagged
-	 * @param isFlagged
+	 * @param isFlagged if user want to make a cell flagged 
 	 */
 	public void setFlagged(boolean isFlagged) {
 		this.isFlagged = isFlagged;
@@ -89,7 +89,7 @@ public class Cell {
 
 	/**
 	 * sets numberNeighbours to a value based on the number of mines
-	 * @param numNeighbors
+	 * @param numNeighbors count of mines neighbouring cells has
 	 */
 	public void setNumNeighbors(int numNeighbors) {
 		this.numNeighbors = numNeighbors;

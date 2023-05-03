@@ -34,7 +34,8 @@ public class MineSweeper {
 
 	/**
 	 * Constructor which initializes our game board
-	 * @param easy2 of the game decided by the user
+	 * @param lev game level
+	 * @param name name of the player playing the game
 	 */
 	public MineSweeper(Level lev,String name){
 		this.level = lev;
@@ -110,8 +111,8 @@ public class MineSweeper {
 	 * used to make a first click while playing the game
 	 * it takes row value and column values as input 
 	 * and makes the click
-	 * @param row
-	 * @param col
+	 * @param row row value of the board to make click
+	 * @param col column value of the board to make click
 	 */
 	private void makeFirstClick(int row,int col){
 		
@@ -129,6 +130,8 @@ public class MineSweeper {
 	 * used in event loops for making clicks
 	 * @param row value to click
 	 * @param col value to click
+	 * @return string representation of board after 
+	 * the game is finished revels mines
 	 */
 	public String makeClick(int row, int col){
 		this.makeFirstClick(row, col);
@@ -240,9 +243,10 @@ public class MineSweeper {
 
 	/**
 	 * used to mark the mine flagged or not flagged;
-	 * @param row
-	 * @param col
-	 * @return String describing about the falg set or not
+	 * @param row row value of the board to make it as flagged
+	 * @param col column value of the board to make it as flagged
+	 * @param f sets flags as true or false
+	 * @return String describing about the flag set or not
 	 */
 	public String makeFlagged(int row, int col, boolean f) {
 
@@ -270,7 +274,8 @@ public class MineSweeper {
 	 * this methods calculates the numbers of each of the box
 	 * and set the value of Cell numNegighnours based on the
 	 * calculation
-	 * @return void
+	 * @param board takes board instance and set number to cells 
+	 * based on the neighboring mines
 	 */
 	private void setNumberToNeuighbouringMines(Board board){
 		for (int x = 0; x < board.getBoard().size(); x++)
@@ -297,7 +302,7 @@ public class MineSweeper {
 
 	/**
 	 * getter method for board;
-	 * @return
+	 * @return board instance
 	 */
 	public Board getBoardd() {
 		// TODO Auto-generated method stub

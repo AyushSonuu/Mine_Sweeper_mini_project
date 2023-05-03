@@ -16,9 +16,9 @@ public final class Level {
 	
 	/**
 	 * constructor creates used to set level
-	 * @param rows
-	 * @param cols
-	 * @param numberOfBombs
+	 * @param rows number of rows in the board
+	 * @param cols number of columns in the board
+	 * @param numberOfBombs total number of mines in the board
 	 */
 	private Level(int rows, int cols, int numberOfBombs) {
 		this.rows = rows;
