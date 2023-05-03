@@ -1,5 +1,7 @@
 package minesweeper;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -16,16 +18,18 @@ public class MineSweeper {
 	private Level level;
 	private int numMines ;
 	private Score score;
+    private TopScorer ts;
 
 	/**
 	 * Constructor which initializes our game board
 	 * @param easy2 of the game decided by the user
 	 */
-	public MineSweeper(Level lev){
+	public MineSweeper(Level lev,String name){
 		this.level = lev;
 		this.numMines = level.getNumberOfBombs();
 		this.board = new Board(lev);
 		this.score = new Score(lev);
+		this.ts = new TopScorer(name);
 
 	}
 
@@ -75,7 +79,7 @@ public class MineSweeper {
 			for(int j =0; j<board.getBoard().get(i).size();j++){
 				if(!board.getBoard().get(i).get(j).isMine()){
 					if(board.getBoard().get(i).get(j).getNumNeighbors()!=-1){
-						m = m+" "+board.getBoard().get(i).get(j)+" " + " | ";
+						m = m+" "+board.getBoard().get(i).get(j).getNumNeighbors()+" " + " | ";
 						continue;
 					}
 					m=m+i+","+j+" | ";
@@ -117,10 +121,24 @@ public class MineSweeper {
 	public String makeClick(int row, int col){
 		this.makeFirstClick(row, col);
 		if(this.board.getBoard().get(row).get(col).isMine()){
-			System.out.println();
-			System.out.println(score.getScore());
-			System.out.println(this.revealMine());
-			return "game over";
+//			System.out.println();
+//			System.out.println();
+//			System.out.println();
+			this.ts.setScore(score.getScore());
+			try {
+				this.ts.writeFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				this.ts.readFile();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "----------------------game over----------------------\n"
+					+"\n"+this.revealMine();
 		}else if (this.board.getBoard().get(row).get(col).getNumNeighbors()>0){
 			this.board.getBoard().get(row).get(col).setClicked(true);
 			this.score.updateRevealedCells();
@@ -264,5 +282,10 @@ public class MineSweeper {
             }
         }
     }
+
+	public Board getBoardd() {
+		// TODO Auto-generated method stub
+		return this.board;
+	}
 
 }

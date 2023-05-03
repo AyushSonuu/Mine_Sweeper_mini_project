@@ -1,0 +1,6 @@
+AYUSH : 180
+ayush : 150
+kiran : 30
+pirru : 520
+VISHAL : 300
+123 : 210
