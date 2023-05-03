@@ -5,3 +5,5 @@ pirru : 520
 VISHAL : 300
 123 : 210
 AYUSH : 150
+anmol : 150
+sohail : 150

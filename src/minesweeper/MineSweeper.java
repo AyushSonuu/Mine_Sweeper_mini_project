@@ -46,7 +46,7 @@ public class MineSweeper {
 			for (int j = 0; j < this.level.getCols(); j++) {
 				if(this.board.getBoard().get(i).get(j).isClicked()){
 
-					s = s+" "+board.getBoard().get(i).get(j)+" " + " | ";
+					s = s+" "+board.getBoard().get(i).get(j).getNumNeighbors()+" " + " | ";
 
 				}else if(this.board.getBoard().get(i).get(j).isFlagged()){
 
@@ -283,21 +283,48 @@ public class MineSweeper {
         }
     }
 
-	
+	/**
+	 * getter method for board;
+	 * @return
+	 */
 	public Board getBoardd() {
 		// TODO Auto-generated method stub
 		return this.board;
 	}
 	
-	public void win(){
+	/**
+	 * if count is equals to total number of cells then gave is finished
+	 * @return true or false based on the cells data
+	 */
+	public boolean win(){
 		int count =0;
 		for (int x = 0; x < this.board.getBoard().size(); x++)
 		{
 			for (int y = 0; y < this.board.getBoard().get(x).size(); y++) 
 			{
-				
+				if(this.board.getBoard().get(x).get(y).isClicked()
+						|| this.board.getBoard().get(x).get(y).isFlagged())
+				{
+					count++;
+				}
 			}
 		}
+		if(this.level.getCols()*this.level.getRows()==count){
+			try {
+				this.ts.writeFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				this.ts.readFile();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return true;
+		}
+		return false;
 	}
 
 }

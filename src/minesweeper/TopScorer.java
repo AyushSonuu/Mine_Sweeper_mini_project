@@ -1,23 +1,22 @@
 package minesweeper;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.SortedMap;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
+/**
+ * writes to the file
+ * @author AYUSH
+ *
+ */
 public class TopScorer {
 	private String Player_name;
 	private int score;
@@ -26,6 +25,11 @@ public class TopScorer {
 	public TopScorer(String name){
 		this.Player_name = name;
 	}
+	
+	/**
+	 * reads the fine and give you highest score
+	 * @throws FileNotFoundException
+	 */
 	public void readFile() throws FileNotFoundException{
 		Scanner sc = new Scanner(f);
 		Map<Integer, String> dic = new HashMap<>();
@@ -34,7 +38,7 @@ public class TopScorer {
 			String[] srr = s.split(" : ");
 			dic.put(Integer.parseInt(srr[1]), srr[0]);
 		}
-//		@SuppressWarnings("unchecked")
+		
 		Set<Integer> scoresarr =  dic.keySet();
 		ArrayList<Integer> srr = new ArrayList<>(scoresarr);
 		Collections.sort(srr);
@@ -56,7 +60,11 @@ public class TopScorer {
 		
 		
 	}
-//	public void
+
+	/**
+	 * writing the score to the file 
+	 * @throws IOException
+	 */
 	public void writeFile() throws IOException{
 		this.f.createNewFile();
 		FileWriter fw = new FileWriter(this.f,true);

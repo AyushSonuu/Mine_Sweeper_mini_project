@@ -1,7 +1,8 @@
 package minesweeper;
 
 /**
- * 
+ * cell class which is the smallest 
+ * unit of our board 
  * @author SUMALATHA
  *
  */

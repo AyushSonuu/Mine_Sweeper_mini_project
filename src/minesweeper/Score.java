@@ -1,5 +1,11 @@
 package minesweeper;
 
+/**
+ * calculates the score based 
+ * on difficulty level and mines
+ * @author AYUSH
+ *
+ */
 public class Score {
     private Level difficulty;
     private int revealedCells;

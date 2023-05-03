@@ -1,14 +1,19 @@
 package minesweeper;
 
 import java.util.ArrayList;
+
 /**
- * 
+ * it creates a 2D array of Cell type
  * @author MRUDULA PATIL
  *
  */
 public class Board {
 	private ArrayList<ArrayList<Cell>> board = new ArrayList<ArrayList<Cell>>();
-
+	
+	/**
+	 * constructor takes level as input
+	 * @param lev
+	 */
 	public Board(Level lev){
 		if (lev==Level.EASY){
 			board = initilizeArray(board,Level.EASY.getRows(), Level.EASY.getCols());
@@ -19,10 +24,22 @@ public class Board {
 		}
 	}
 
+	/**
+	 * returns board instance
+	 * @return
+	 */
 	public ArrayList<ArrayList<Cell>> getBoard() {
 		return board;
 	}
 
+	/**
+	 * creates cell instance for every position and assigns 
+	 * with default values
+	 * @param arr
+	 * @param roww
+	 * @param coll
+	 * @return
+	 */
 	public ArrayList<ArrayList<Cell>> initilizeArray(ArrayList<ArrayList<Cell>> arr,int roww, int coll){
 		for (int i = 0; i <roww ; i++) {
 			ArrayList<Cell> row = new ArrayList<Cell>();

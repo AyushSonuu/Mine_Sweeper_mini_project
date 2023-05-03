@@ -1,7 +1,7 @@
 package minesweeper;
 
 /**
- * 
+ * decides the level of the game 
  * @author VISHAL BIRADER
  *
  */
@@ -35,8 +35,8 @@ public final class Level {
 	}
 	
 	/**
-	 * used fetch number of cols of board
-	 * @return returns col of the board according to level
+	 * used fetch number of columns of board
+	 * @return returns columns of the board according to level
 	 */
 	public int getCols() {
 		return cols;

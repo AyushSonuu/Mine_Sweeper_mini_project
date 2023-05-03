@@ -5,10 +5,9 @@ import java.util.Scanner;
 public class Play {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		game();
-
 }
+	
 	/**
 	 * starting and playing the game
 	 */
@@ -29,6 +28,7 @@ public class Play {
 				+ "6.exit");
 
 		int swca = sc.nextInt();
+		if(m1.win())System.out.println("CONGRACTULATIONS YOU WON THE MATCH");
 		if(swca==6)break;
 		else if(swca == 1){
 				System.out.println("Enter the position to click");
