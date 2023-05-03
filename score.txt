@@ -7,3 +7,4 @@ VISHAL : 300
 AYUSH : 150
 anmol : 150
 sohail : 150
+ayush : 130
