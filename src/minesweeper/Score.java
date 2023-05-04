@@ -65,7 +65,7 @@ public class Score {
        else if(this.difficulty==Level.INTERMEDIATE){
            points += 20;
        }
-       else if(this.difficulty==Level.INTERMEDIATE){
+       else if(this.difficulty==Level.EXPERT){
     	   points += 30;
        }
        else{
